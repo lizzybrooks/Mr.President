@@ -3,7 +3,7 @@ var i, healthcare1, greeting, button2, greeting2, button3, greeting3;
 
 let answers = [];
 
-let dems;
+let dems = 0;
 let ind;
 let cons;
 
@@ -130,13 +130,93 @@ let cons;
     textSize(50);
   }
 
+  function draw() {
+
+    background(255);
+
+  // Draw and shade the flag pole
+  var poleWidth = 40;
+  fill(200);
+  rect(0, 0, poleWidth, height);
+  for (var poleShade = 0; poleShade < poleWidth; poleShade ++) {
+    stroke(poleShade / (poleWidth * 2) * 700, 150);
+    line(poleShade, 0, poleShade, height);
+  }
+
+  // Set the flag size
+  var flagWidth = 1000;
+  var flagHeight = 650;
+
+  // Draw the red stripes
+  var stripeHeight = 50;
+  fill(178, 34, 52);
+  noStroke();
+  for (var stripes = 0; stripes < flagHeight; stripes += stripeHeight * 2) {
+    rect(poleWidth, stripes, flagWidth, stripeHeight);
+  }
+
+  // Draw the blue box
+  fill(60, 59, 110);
+  rect(poleWidth, 0, 420, stripeHeight * 7);
+
+  // Draw the first row of white stars
+  fill(255);
+  for (var starRow1V = 17.5; starRow1V <= 315; starRow1V += 70) {
+    for (var starRow1X = 75, starRow1Y = starRow1V; starRow1X <= 425; starRow1X += 70) {
+      beginShape();
+      vertex(starRow1X, starRow1Y);
+      vertex(starRow1X + 11.5, starRow1Y + 35);
+      vertex(starRow1X - 19, starRow1Y + 13);
+      vertex(starRow1X + 19, starRow1Y + 13);
+      vertex(starRow1X - 11.5, starRow1Y + 35);
+      vertex(starRow1X, starRow1Y);
+      endShape();
+    }
+  }
+
+  // Draw the second row of white stars
+  for (var starRow2V = 17.5; starRow2V <= 280; starRow2V += 70) {
+    for (var starRow2X = 110, starRow2Y = starRow2V + 35; starRow2X <= 425; starRow2X += 70) {
+      beginShape();
+      vertex(starRow2X, starRow2Y);
+      vertex(starRow2X + 11.5, starRow2Y + 35);
+      vertex(starRow2X - 19, starRow2Y + 13);
+      vertex(starRow2X + 19, starRow2Y + 13);
+      vertex(starRow2X - 11.5, starRow2Y + 35);
+      vertex(starRow2X, starRow2Y);
+      endShape();
+    }
+  }
+
+  // Shade the flag in three transparent gradients
+  for (var gradient1 = 40; gradient1 < 373; gradient1 ++) {
+    stroke(gradient1 / flagWidth * 3 * 255, 50);
+    line(gradient1, 0, gradient1, flagHeight);
+  }
+  for (var gradient2A = 373, gradient2B = 255; gradient2A < 706; gradient2A ++, gradient2B --) {
+    stroke(gradient2B, 50);
+    line(gradient2A, 0, gradient2A, flagHeight);
+  }
+  for (var gradient3A = 706, gradient3B = 0; gradient3A < width; gradient3A ++, gradient3B ++) {
+    stroke(gradient3B / flagWidth * 3 * 255, 50);
+    line(gradient3A, 0, gradient3A, flagHeight);
+  }
+
+  }
+
+
  function calculate(){
     for (let i = 0; i < answers.length;i++){
      if(answers[i]=="Democrat"){
         dems=dems+1;
-     print(dems);
-     }
-  }
+      }
+    }
+      print("You answered "+dems+" questions with Democrat answers.");
+}
+
+function keyPressed(){
+   calculate();
+
 }
   function greet() {
     // var orders = input.value();
@@ -336,81 +416,4 @@ function suppression3() {
   Voter2.hide()
   Voter3.hide()
   console.log(calculate)
-}
-
-
-
-
-function draw() {
-
-  background(255);
-
-// Draw and shade the flag pole
-var poleWidth = 40;
-fill(200);
-rect(0, 0, poleWidth, height);
-for (var poleShade = 0; poleShade < poleWidth; poleShade ++) {
-  stroke(poleShade / (poleWidth * 2) * 700, 150);
-  line(poleShade, 0, poleShade, height);
-}
-
-// Set the flag size
-var flagWidth = 1000;
-var flagHeight = 650;
-
-// Draw the red stripes
-var stripeHeight = 50;
-fill(178, 34, 52);
-noStroke();
-for (var stripes = 0; stripes < flagHeight; stripes += stripeHeight * 2) {
-  rect(poleWidth, stripes, flagWidth, stripeHeight);
-}
-
-// Draw the blue box
-fill(60, 59, 110);
-rect(poleWidth, 0, 420, stripeHeight * 7);
-
-// Draw the first row of white stars
-fill(255);
-for (var starRow1V = 17.5; starRow1V <= 315; starRow1V += 70) {
-  for (var starRow1X = 75, starRow1Y = starRow1V; starRow1X <= 425; starRow1X += 70) {
-    beginShape();
-    vertex(starRow1X, starRow1Y);
-    vertex(starRow1X + 11.5, starRow1Y + 35);
-    vertex(starRow1X - 19, starRow1Y + 13);
-    vertex(starRow1X + 19, starRow1Y + 13);
-    vertex(starRow1X - 11.5, starRow1Y + 35);
-    vertex(starRow1X, starRow1Y);
-    endShape();
-  }
-}
-
-// Draw the second row of white stars
-for (var starRow2V = 17.5; starRow2V <= 280; starRow2V += 70) {
-  for (var starRow2X = 110, starRow2Y = starRow2V + 35; starRow2X <= 425; starRow2X += 70) {
-    beginShape();
-    vertex(starRow2X, starRow2Y);
-    vertex(starRow2X + 11.5, starRow2Y + 35);
-    vertex(starRow2X - 19, starRow2Y + 13);
-    vertex(starRow2X + 19, starRow2Y + 13);
-    vertex(starRow2X - 11.5, starRow2Y + 35);
-    vertex(starRow2X, starRow2Y);
-    endShape();
-  }
-}
-
-// Shade the flag in three transparent gradients
-for (var gradient1 = 40; gradient1 < 373; gradient1 ++) {
-  stroke(gradient1 / flagWidth * 3 * 255, 50);
-  line(gradient1, 0, gradient1, flagHeight);
-}
-for (var gradient2A = 373, gradient2B = 255; gradient2A < 706; gradient2A ++, gradient2B --) {
-  stroke(gradient2B, 50);
-  line(gradient2A, 0, gradient2A, flagHeight);
-}
-for (var gradient3A = 706, gradient3B = 0; gradient3A < width; gradient3A ++, gradient3B ++) {
-  stroke(gradient3B / flagWidth * 3 * 255, 50);
-  line(gradient3A, 0, gradient3A, flagHeight);
-}
-
 }
